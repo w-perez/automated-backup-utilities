@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  gmail-indexer:
+    build: .
+    container_name: gmail_to_sqlite
+    environment:
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASS=${EMAIL_PASS}
+      - IMAP_SERVER=${IMAP_SERVER}
+    volumes:
+      # Maps a folder named "data" on your computer to "/app/data" in the container.
+      # Ensure your Python script saves the DB inside a "data/" subfolder!
+      - ./data:/app/data
+    restart: on-failure
